@@ -19,22 +19,56 @@
 
             <div class="form-group">
                 <label for="releaseDate">Release date</label>
-                <input type="text" class="form-control" id="releaseDate" required [(ngModel)]="model.releaseDate" name="releaseDate">
+                <div class="input-group date" data-provide="datepicker">
+                    <input type="text" class="form-control" id="releaseDate" required [(ngModel)]="model.releaseDate" name="releaseDate" #releaseDate="ngModel">
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </div>
+                    <div *ngIf="releaseDate.invalid && (releaseDate.dirty || releaseDate.touched)" class="alert alert-danger">
+                            <div *ngIf="releaseDate.errors.required">
+                                Please select a releaseDate before saving.
+                            </div>
+                    </div>
+                </div>
             </div>
-
+            
             <div class="form-group">
                 <label for="duration">Duration</label>
-                <input type="text" class="form-control" id="duration" required [(ngModel)]="model.duration" name="duration">
+                <input type="text" class="form-control" id="duration" required [(ngModel)]="model.duration" name="duration" minlength="2" #duration="ngModel">
+                <div *ngIf="duration.invalid && (duration.dirty || duration.touched)" class="alert alert-danger">
+                        <div *ngIf="duration.errors.required">
+                            Please enter a duration before saving.
+                        </div>
+                        <div *ngIf="duration.errors.minlength">
+                            Please enter a numeric number.
+                        </div>
+                </div>
             </div>
 
             <div class="form-group">
                 <label for="genre">Genre</label>
-                <input type="text" class="form-control" id="genre" required [(ngModel)]="model.genre" name="genre">
+                <input type="text" class="form-control" id="genre" required [(ngModel)]="model.genre" name="genre" minlength="5" #genre="ngModel">
+                <div *ngIf="genre.invalid && (genre.dirty || genre.touched)" class="alert alert-danger">
+                        <div *ngIf="genre.errors.required">
+                            Please enter a genre before saving.
+                        </div>
+                        <div *ngIf="genre.errors.minlength">
+                            Please enter a genre with at least 5 characters.
+                        </div>
+                </div>
             </div>
 
             <div class="form-group">
                 <label for="synopsis">Synopsis</label>
-                <input type="text" class="form-control" id="synopsis" required [(ngModel)]="model.synopsis" name="synopsis">
+                <input type="text" class="form-control" id="synopsis" required [(ngModel)]="model.synopsis" name="synopsis" minlength="20" #synopsis="ngModel">
+                <div *ngIf="synopsis.invalid && (synopsis.dirty || synopsis.touched)" class="alert alert-danger">
+                        <div *ngIf="synopsis.errors.required">
+                            Please enter a synopsis before saving.
+                        </div>
+                        <div *ngIf="synopsis.errors.minlength">
+                            Please enter a title with at least 20 characters.
+                        </div>
+                </div>
             </div>
 
             <button type="submit" class="btn btn-success" [disabled]="!movieForm.form.valid" >Save</button>

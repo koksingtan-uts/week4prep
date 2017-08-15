@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { OnInit } from '@angular/core';
 import { Movie } from './movie';
+//import {DatepickerModule} from 'boostrap';
 
 @Component({
     selector: 'movie-form',
@@ -10,6 +11,7 @@ import { Movie } from './movie';
 
 export class MovieFormComponent implements OnInit{
     model: Movie;
+    //releaseDatePicker: BootstrapV3DatetimePicker.Datetimepicker;
     
     constructor(private http: HttpClient) {
         // this.http.get('http://localhost:3000/api/movie').subscribe(data => {
@@ -19,6 +21,14 @@ export class MovieFormComponent implements OnInit{
     }
 
     ngOnInit(): void {
+        // this.auctionDatePicker = $("#auctiondatepicker")
+        // .datetimepicker({
+        //     useCurrent: false,
+        //     format: "MM/DD/YYYY",
+        //     minDate: moment()
+        // })
+        // .data("DateTimePicker");
+
         this.http.get('http://localhost:3000/api/movie').subscribe(data => {
             this.model = new Movie( data['title'], data['release date'], data['duration'], data['genre'], data['synopsis']);
         });
